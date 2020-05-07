@@ -65,6 +65,6 @@ services:
         constraints: [node.role == manager]
 networks:
   application_network:
-    driver: bridge
+#    driver: bridge
 volumes:
   volume:
