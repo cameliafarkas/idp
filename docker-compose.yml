@@ -2,30 +2,32 @@ version: '3'
 services:
   frontend:
     image: cameliafarkas/idp:frontend
-    build: ./frontend/
     ports:
       - "5000:5000"
+    # networks:
+    #   - application_network
     depends_on:
       - "database"
   backend:
     image: cameliafarkas/idp:backend
-    build: ./backend/
     ports:
       - "4000:4000"
+    # networks:
+    #   - application_network
     depends_on:
       - "database"
   payment:
     image: cameliafarkas/idp:payment
-    build: ./payment/
     ports:
       - "4005:4005"
+    # networks:
+    #   - application_network
     depends_on:
       - "database"
   database:
     image: cameliafarkas/idp:database
-    build: ./database/
-    volumes:
-     - ./volume:/var/lib/mysql
+    # volumes:
+    #  - ./volume:/var/lib/mysql
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: testuser
@@ -33,23 +35,32 @@ services:
       MYSQL_DATABASE: hairshop
     ports:
       - '3306:3306'
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - 8081:8081
-    depends_on:
-      - "database"
+    # networks:
+    #   - application_network
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 8080:8080
+  #   depends_on:
+  #     - "database"
+  #   networks:
+  #     - application_network
   visualizer:
     image: dockersamples/visualizer
     ports:
       - "8080:8080/tcp"
     depends_on:
       - "database"
+    # networks:
+    #   - application_network
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     deploy:
       placement:
         constraints: [node.role == manager]
-volumes:
-  volume:
+# networks:
+#   application_network:
+#     driver: bridge
+# volumes:
+#   volume:
