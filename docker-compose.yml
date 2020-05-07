@@ -1,0 +1,66 @@
+version: '3'
+services:
+  frontend:
+    build: ./frontend/
+    ports:
+      - "5000:5000"
+    networks:
+      - application_network
+    depends_on:
+      - "database"
+  backend:
+    build: ./backend/
+    ports:
+      - "4000:4000"
+    networks:
+      - application_network
+    depends_on:
+      - "database"
+  payment:
+    build: ./payment/
+    ports:
+      - "4005:4005"
+    networks:
+      - application_network
+    depends_on:
+      - "database"
+  database:
+    build: ./database/
+    volumes:
+     - ./volume:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: testuser
+      MYSQL_PASSWORD: testpassword
+      MYSQL_DATABASE: hairshop
+    ports:
+      - '3306:3306'
+    networks:
+      - application_network
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - "database"
+    networks:
+      - application_network
+  visualizer:
+    image: dockersamples/visualizer
+    ports:
+      - "8080:8080/tcp"
+    depends_on:
+      - "database"
+    networks:
+      - application_network
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+    deploy:
+      placement:
+        constraints: [node.role == manager]
+networks:
+  application_network:
+    driver: bridge
+volumes:
+  volume:
