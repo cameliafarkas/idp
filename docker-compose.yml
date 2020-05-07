@@ -1,6 +1,7 @@
 version: '3'
 services:
   frontend:
+    image: cameliafarkas/idp:frontend
     build: ./frontend/
     ports:
       - "5000:5000"
@@ -9,6 +10,7 @@ services:
     depends_on:
       - "database"
   backend:
+    image: cameliafarkas/idp:backend
     build: ./backend/
     ports:
       - "4000:4000"
@@ -17,6 +19,7 @@ services:
     depends_on:
       - "database"
   payment:
+    image: cameliafarkas/idp:payment
     build: ./payment/
     ports:
       - "4005:4005"
@@ -25,6 +28,7 @@ services:
     depends_on:
       - "database"
   database:
+    image: cameliafarkas/idp:database
     build: ./database/
     volumes:
      - ./volume:/var/lib/mysql
