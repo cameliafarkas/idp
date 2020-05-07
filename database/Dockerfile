@@ -9,5 +9,4 @@ ENV MYSQL_ROOT_PASSWORD=$MYSQL_ROOT_PASSWORD
 
 WORKDIR /app
 
-
 COPY ./sql-scripts/ /docker-entrypoint-initdb.d/
