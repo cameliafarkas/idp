@@ -8,7 +8,7 @@ app = Flask(__name__)
 
 user = ""
 
-frontend = "http://frontend:5000/"
+frontend = "http://ec2-3-8-137-154.eu-west-2.compute.amazonaws.com:5000/"
 
 mydb = mysql.connector.connect(
   host="database",
@@ -32,7 +32,7 @@ def set_shopping_cart():
 
 	mydb.commit()
 	return "Cos adaugat"
-	
+
 @app.route('/get_products', methods=["GET"])
 def get_products():
 	products = []
@@ -172,7 +172,7 @@ def update_stock():
 
 		query = "INSERT INTO stock (quantity, product_id) VALUES (%s, %s)"
 		value = (product["total_quantity"] - number, product["id"])
-		
+
 		try:
 			mycursor.execute(query, value)
 		except mysql.connector.Error:

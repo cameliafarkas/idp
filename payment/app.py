@@ -6,7 +6,7 @@ import mysql.connector
 
 app = Flask(__name__)
 
-frontend = "http://frontend:5000/"
+frontend = "http://ec2-3-8-137-154.eu-west-2.compute.amazonaws.com:5000/"
 
 mydb = mysql.connector.connect(
   host="database",
