@@ -8,7 +8,7 @@ import mysql.connector
 
 app = Flask(__name__)
 
-user = ""
+user = "cami"
 
 backend = "http://backend:4000/"
 payment = "http://payment:4005/"

@@ -6,7 +6,7 @@ import mysql.connector
 
 app = Flask(__name__)
 
-user = ""
+user = "cami"
 
 frontend = "http://frontend:5000/"
 
