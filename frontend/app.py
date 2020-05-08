@@ -10,8 +10,8 @@ app = Flask(__name__)
 
 user = ""
 
-backend = "http://ec2-3-8-137-154.eu-west-2.compute.amazonaws.com:4000/"
-payment = "http://ec2-3-8-137-154.eu-west-2.compute.amazonaws.com:4005/"
+backend = "http://backend:4000/"
+payment = "http://payment:4005/"
 
 @app.route('/')
 def index():

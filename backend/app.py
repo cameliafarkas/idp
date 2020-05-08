@@ -8,10 +8,11 @@ app = Flask(__name__)
 
 user = ""
 
-frontend = "http://ec2-3-8-137-154.eu-west-2.compute.amazonaws.com:5000/"
+frontend = "http://frontend:5000/"
 
 mydb = mysql.connector.connect(
   host="database",
+  port="3306",
   user="root",
   passwd="root",
   database="hairshop"
