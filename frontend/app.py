@@ -20,7 +20,7 @@ def index():
     if user == "":
         end = "login"
     else:
-        end = "products"
+        end = "get_products"
 
 
     return render_template("index.html", end=end)
