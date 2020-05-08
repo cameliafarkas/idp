@@ -4,30 +4,26 @@ services:
     image: cameliafarkas/idp:frontend
     ports:
       - "5000:5000"
-    # networks:
-    #   - application_network
+    restart: always
     depends_on:
       - "database"
   backend:
     image: cameliafarkas/idp:backend
     ports:
       - "4000:4000"
-    # networks:
-    #   - application_network
+    restart: always
     depends_on:
       - "database"
   payment:
     image: cameliafarkas/idp:payment
     ports:
       - "4005:4005"
-    # networks:
-    #   - application_network
+    restart: always
     depends_on:
       - "database"
   database:
     image: cameliafarkas/idp:database
-    # volumes:
-    #  - ./volume:/var/lib/mysql
+    restart: always
     environment:
       MYSQL_ROOT_PASSWORD: root
       MYSQL_USER: testuser
@@ -35,8 +31,6 @@ services:
       MYSQL_DATABASE: hairshop
     ports:
       - '3306:3306'
-    # networks:
-    #   - application_network
   # adminer:
   #   image: adminer
   #   restart: always
@@ -50,17 +44,9 @@ services:
     image: dockersamples/visualizer
     ports:
       - "8080:8080/tcp"
-    depends_on:
-      - "database"
-    # networks:
-    #   - application_network
+    restart: always
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
     deploy:
       placement:
         constraints: [node.role == manager]
-# networks:
-#   application_network:
-#     driver: bridge
-# volumes:
-#   volume:

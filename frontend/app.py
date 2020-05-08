@@ -56,7 +56,7 @@ def get_products():
     url = backend + "get_products"
     r = requests.get(url)
 
-    data = r.json() 
+    data = r.json()
 
     return render_template("products.html", products=data["products"])
 
@@ -77,12 +77,12 @@ def get_shopping_cart():
     global user
 
     if user == "":
-        return redirect("http://localhost:5000/login")
+        return redirect(url_for('login'))
 
     url = backend + "get_cart_items"
 
     r = requests.get(url)
-    data = r.json() 
+    data = r.json()
     products = data["products"]
 
     pr = {}
@@ -96,7 +96,7 @@ def get_shopping_cart():
             pr[id]["price"] += int(price)
         total += int(price)
 
-    #change 
+    #change
     products = []
 
     for (id, p) in pr.items():
@@ -114,7 +114,7 @@ def pay():
     url = backend + "get_cart_items"
 
     r = requests.get(url)
-    data = r.json() 
+    data = r.json()
     products = data["products"]
 
     pr = {}
@@ -134,7 +134,7 @@ def pay():
         products.append((id, str(p["quantity"]), p["name"], str(p["price"])))
 
     url = backend + "get_shipment_price"
-    
+
     r = requests.get(url)
 
     data = r.json()
@@ -152,11 +152,11 @@ def add_payment():
     data["user"] = user
 
     if not(len(data["cardnumber"]) == 16) and not(data["cardnumber"].isdigit()):
-        return redirect("http://localhost:5000/pay")
+        return redirect(url_for('pay'))
     if not(len(data["expyear"]) == 4) and not(data["expyear"].isdigit()):
-        return redirect("http://localhost:5000/pay")
+        return redirect(url_for('pay'))
     if not(len(data["cvv"]) == 3) and not(data["cvv"].isdigit()):
-        return redirect("http://localhost:5000/pay")
+        return redirect(url_for('pay'))
 
     r = requests.post(url, data=data)
 

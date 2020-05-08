@@ -1,4 +1,4 @@
-# Derived from official mysql image (our base image)
+#Derived from official mysql image (our base image)
 FROM mysql:5.6
 # Add a database
 
