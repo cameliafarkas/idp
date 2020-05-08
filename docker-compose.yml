@@ -31,15 +31,13 @@ services:
       MYSQL_DATABASE: hairshop
     ports:
       - '3306:3306'
-  # adminer:
-  #   image: adminer
-  #   restart: always
-  #   ports:
-  #     - 8080:8080
-  #   depends_on:
-  #     - "database"
-  #   networks:
-  #     - application_network
+  adminer:
+    image: adminer
+    restart: always
+    ports:
+      - 8081:8081
+    depends_on:
+      - "database"
   visualizer:
     image: dockersamples/visualizer
     ports:
